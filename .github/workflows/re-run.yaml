@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout repository
-      uses: actions/checkout@4  #GitHub 공식 액션(Action)으로 액션의 버전 4를 사용
+      uses: actions/checkout@v4  #GitHub 공식 액션(Action)으로 액션의 버전 4를 사용
     - name: cat readme
       run: cat README.md
