@@ -17,5 +17,4 @@ jobs:
         done 
       timeout-minutes: 1  
     - name: echo 
-      run: echo "hello world"  # job 은 3분이고 loop는  1분이므로 이 echo 실행 가능
-        
+      run: echo "hello world"   
