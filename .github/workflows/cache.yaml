@@ -1,0 +1,30 @@
+name: cache
+on: 
+  push:
+    paths: 
+    - 'my-app/**'
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4         # repository 를 가져온다.
+    - name: setup-node
+      uses: actions/setup-node@v3       # 18 버전의 node를 설치한다. 
+      with: 
+        node-version: 18
+    - name: cache node.js modules       # cache 를 이용하는데 with 를 통해서 cahce 할 정보를 전달 
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm                                                          # 어디에 cache 할지?, 여기서는 node 의 모듈이 저장되는 경로를 지정
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}   # 캐쉬의 키를 의미 ,  여기서는 운영체제와 해쉬값을 사용 따라서 json 파일이 변경 될때마다 key가 갱신
+        restore-keys: ${{ runner.os }}-node-                                   # 캐쉬 복구를 위한 것, 일치하는 키가 없을때 가장 가까운 키를 찾아서 사용 해라
+    - name: install depdencies
+      run : |
+        cd  my-app
+        npm ci
+    - name: npm build
+      run : |
+        cd my-app
+        npm run build
