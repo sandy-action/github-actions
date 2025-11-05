@@ -10,11 +10,11 @@ jobs:
     - name: loop
       run: |
         count=0
-        while true: do
+        while true; do
           echo "seconds: $count"
           count=$((count+1))
           sleep 1
         done 
     - name: echo 
-      run: echo "hello world". # job 은 3분이고 loop는  1분이므로 이 echo 실행 가능
+      run: echo "hello world"  # job 은 3분이고 loop는  1분이므로 이 echo 실행 가능
         
