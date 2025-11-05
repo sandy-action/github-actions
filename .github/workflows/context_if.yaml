@@ -1,0 +1,10 @@
+name: context-if-workflow
+on: workflow_dispatch
+
+jobs:
+  contextif:
+    if: ${{ github.ref_name == 'dev' }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo 
+      run : echo "success"
