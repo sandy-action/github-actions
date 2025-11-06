@@ -12,5 +12,5 @@ jobs:
     steps:
     - name: check matrix 
       run: |
-        echo "${{ metrix.version }}" 
-        echo "${{ metrix.os }} " 
+        echo "${{ matrix.version }}" 
+        echo "${{ matrix.os }} " 
