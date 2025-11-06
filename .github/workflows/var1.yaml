@@ -1,0 +1,16 @@
+name: var1
+on: push
+
+env:
+  level: workflow 
+
+jobs:
+  get-env:
+    runs-on: ubuntu-latest 
+    steps:
+    - name: create env 1
+      run: echo "level=job1" >> $GITHUB_ENV
+    - name: create env 2
+      run: echo "level=job2" >> $GITHUB_ENV
+    - name: check env  
+      run: echo "LEVEL ${{ env.level }}"
