@@ -5,14 +5,29 @@ env:
   level: workflow 
 
 jobs:
+  get-env-1:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo 
+      run: echo "LEVEL ${{ env.level }}"
+  get-env-2:
+    runs-on: ubuntu-latest
+    env:
+      level: jobs
+    steps:
+    - name: echo 
+      run: echo "LEVEL ${{ env.level }}"
+  get-env-3:
+    runs-on: ubuntu-latest 
+    steps:
+    - name: echo 
+      env:
+        level: step
+      run: echo "LEVEL ${{ env.level }}"
   get-env:
     runs-on: ubuntu-latest 
     steps:
-    - name: create env 1
-      id: env1
-      run: echo "level=job1" >> $GITHUB_ENV
-    - name: create env 2
-      id: env2
-      run: echo "level=job2" >> $GITHUB_ENV
+    - name: create env  
+      run: echo "level=job1" >> $GITHUB_ENV 
     - name: check env  
-      run: echo "LEVEL ${{ steps.env2.env.level }}"
+      run: echo "LEVEL ${{ env.level }}"
