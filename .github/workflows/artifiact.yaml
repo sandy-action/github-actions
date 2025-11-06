@@ -8,9 +8,19 @@ jobs:
     steps: 
     - name: echo 
       run: echo hello-world > hello.txt
-    - name: upload artificat
-      uses: actions/upload-artifact@v3
+    - name: upload artifcat
+      uses: actions/upload-artifact@v4
       with: 
         name: artifact-test
         path: ./hello.txt
 
+  download-artifact:
+    runs-on: ubuntu-latest
+    steps:
+    - name: download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: artifact-test
+        path: ./
+    - name: check
+      run: cat hello.txt
