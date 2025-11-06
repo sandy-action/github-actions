@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         version: [3.7, 3.8]
-        os: [window-latest, ubuntu-latest]         
+        os: [windows-latest, ubuntu-latest]         
     steps:
     - name: check matrix 
       run: |
