@@ -1,0 +1,16 @@
+name: matrix
+on: push
+
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version: [3.7, 3.8]
+        os: [window-latest, ubuntu-latest]         
+    steps:
+    - name: check matrix 
+      run: |
+        echo "${{ metrix.version }}" 
+        echo "${{ metrix.os }} " 
