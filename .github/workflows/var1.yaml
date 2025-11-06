@@ -15,4 +15,4 @@ jobs:
       id: env2
       run: echo "level=job2" >> $GITHUB_ENV
     - name: check env  
-      run: echo "LEVEL ${{ env2.env.level }}"
+      run: echo "LEVEL ${{ steps.env2.env.level }}"
