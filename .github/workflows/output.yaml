@@ -1,0 +1,17 @@
+name: output
+on: push
+
+jobs:
+  create_output:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo output
+      id: check-output-1
+      run: echo "test=hello" >> "$GITHUB_OUTPUT"
+    - name: echo output
+      id: check-output-2
+      run: echo "test=hello2" >> "$GITHUB_OUTPUT"  
+    - name: check output
+      run: |
+        echo ${{ steps.check-output-1.outputs.test}}   # 동일한 키가 여러 job 에서 사용 가능 하기 때문에 ID 가 필요 
+        echo ${{ steps.check-output-2.outputs.test}}   # 동일한 키가 여러 job 에서 사용 가능 하기 때문에 ID 가 필요 
