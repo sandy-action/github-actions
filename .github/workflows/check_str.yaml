@@ -1,0 +1,13 @@
+name: check string
+on: push
+
+jobs:
+  check1:
+    runs-on: ubuntu-latest
+    steps:
+    - name: check start
+      run: startsWith('github actons', ‘git’)
+    - name: check end
+      run: endsWith('github actons', ‘git’)
+    - name: check contains
+      run: endsWith('github actons', act)
