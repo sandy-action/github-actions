@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: gh auth login 
-        run: echo ${{ secrets.PERSONAL_ACCESS_TOKEN }}|  gh login --with-token
+        run: echo ${{ secrets.PERSONAL_ACCESS_TOKEN }}| gh auth login --with-token
       - name: create-repo
         run: |
           FULL_NAME="service-${{ github.event.inputs.repo_name }}" 
