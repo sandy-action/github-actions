@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: check start
-      run: startsWith('github actons', ‘git’)
+      run: startsWith('github actons',‘git’)
     - name: check end
-      run: endsWith('github actons', ‘git’)
+      run: endsWith('github actons',‘git’)
     - name: check contains
-      run: endsWith('github actons', act)
+      run: endsWith('github actons','act')
