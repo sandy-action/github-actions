@@ -1,0 +1,27 @@
+name: Create prefixed GitHub repo and notify Slack
+on:
+  workflow_dispatch:
+    inputs:
+      repo_name:
+        description: "Repository name (without prefix)"
+        required: true
+
+jobs:
+  create-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create GitHub repository
+        id: create_repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}                         # GitHub Actions에서 기본으로 제공되는 빌트인 토큰이기 때문에 별도로 Secret을 추가할 필요는 없습니다.
+        run: |
+          FULL_NAME="service-${{ github.event.inputs.repo_name }}"
+          echo "Creating repository: $FULL_NAME"
+
+          if gh repo create sandy-action/$FULL_NAME --public; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "repo_url=https://github.com/${{ github.repository_owner }}/$FULL_NAME" >> $GITHUB_OUTPUT
+          else
+            echo "result=failed" >> $GITHUB_OUTPUT
+          fi
