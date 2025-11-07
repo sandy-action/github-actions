@@ -1,0 +1,19 @@
+name: if-cond2
+on:
+  push:
+  workflow_dispatch:
+    
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - name: exit
+      run: exit 1
+    - name: echo 
+      run: echo hello 
+  job2: 
+    needs: [job1]
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo 
+      run: echo hello2 
