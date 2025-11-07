@@ -1,4 +1,5 @@
 name: Create prefixed GitHub repo and notify Slack
+
 on:
   workflow_dispatch:
     inputs:
@@ -9,12 +10,39 @@ on:
 jobs:
   create-repo:
     runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.create_repo.outputs.result }}
+      repo_url: ${{ steps.create_repo.outputs.repo_url }}
 
     steps:
-      - name: gh auth login 
-        run: echo ${{ secrets.PERSONAL_ACCESS_TOKEN }}| gh auth login --with-token
-      - name: create-repo
+      - name: Authenticate with GitHub CLI
+        run: echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}" | gh auth login --with-token
+
+      - name: Create Repository
+        id: create_repo
         run: |
-          FULL_NAME="service-${{ github.event.inputs.repo_name }}" 
-          gh repo create sandy-action/$FULL_NAME --public 
- 
+          FULL_NAME="service-${{ github.event.inputs.repo_name }}"
+          echo "Creating repository: $FULL_NAME"
+
+          if gh repo create sandy-action/$FULL_NAME --public; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "repo_url=https://github.com/sandy-action/$FULL_NAME" >> $GITHUB_OUTPUT
+          else
+            echo "result=failed" >> $GITHUB_OUTPUT
+          fi
+
+  slack-sender:
+    runs-on: ubuntu-latest
+    needs: [create-repo]
+    steps:
+      - name: Send Slack Notification
+        run: |
+          if [ "${{ needs.create-repo.outputs.result }}" = "success" ]; then
+            STATUS_MSG="✅ Repository created successfully: <${{ needs.create-repo.outputs.repo_url }}>"
+          else
+            STATUS_MSG="❌ Failed to create repository: service-${{ github.event.inputs.repo_name }}"
+          fi
+
+          curl -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"$STATUS_MSG\"}" \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
