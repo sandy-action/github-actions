@@ -1,4 +1,4 @@
-name: issue-notify
+name: issue-notify1
 on: 
   issues:
     type: [opened]
