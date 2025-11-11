@@ -1,9 +1,0 @@
-name: check pat
-on: push
-
-jobs:
-  check-pat:
-    runs-on: ubuntu-latest
-    steps:
-    - name: check pat
-      run: echo ${{ secrets.PERSONAL_ACCESS_TOKEN }}
