@@ -10,5 +10,5 @@ jobs:
    - name: step 2
      run: |
       echo hello world6
-      echo hello world2-part2-1
+      echo hello world2-part2-2
       echo github action
