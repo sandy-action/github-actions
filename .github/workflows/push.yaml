@@ -10,4 +10,4 @@ jobs:
    - name: step 2
      run: |
       echo hello world2
-      ecoh github action
+      echo github action
