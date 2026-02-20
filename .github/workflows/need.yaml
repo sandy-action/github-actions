@@ -1,0 +1,18 @@
+name: need-workflow
+on: push
+
+jobs:
+  job1:
+   runs-on: ubuntu-latest
+   steps:
+   - name: job1
+     run : echo job2
+  
+  job2:
+    runs-on: ubuntu-latest
+    needs : [job1]
+    steps:
+    - name: job2
+      run: echo job1
+
+      
