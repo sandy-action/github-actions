@@ -10,7 +10,7 @@ on:
       envionment:
         description: 'set env'
         required: true
-        default: 'github-actions'
+        default: 'dev'
         type: choice
         options:
          - dev
