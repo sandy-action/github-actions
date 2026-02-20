@@ -13,6 +13,6 @@ jobs:
     needs : [job1]
     steps:
     - name: checkout
-      run: actions/checkout@v4
+      uses: actions/checkout@v4
     - name: read me
       run: cat README.md
