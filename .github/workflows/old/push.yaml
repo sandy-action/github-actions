@@ -9,5 +9,5 @@ jobs:
      run: echo hello world
    - name: step 2
      run: |
-      echo hello world2
+      echo hello world2-part2-1
       echo github action
