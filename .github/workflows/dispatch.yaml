@@ -13,8 +13,8 @@ on:
         default: 'dev'
         type: choice
         options:
-         - dev
-         - prod
+        - dev
+        - prod
 
 
 jobs:
